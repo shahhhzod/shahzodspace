@@ -1,0 +1,92 @@
+ <!-- Sidebar Start -->
+ <aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div>
+    <div class="brand-logo d-flex align-items-center justify-content-between">
+      <a href="/" class="text-nowrap logo-img">
+           shahzodspace
+      </a>
+      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+         <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+      <ul id="sidebarnav">
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'profile' %}" aria-expanded="false">
+            <span>
+               <i class="bi bi-person-fill"></i>
+            </span>
+            <span class="hide-menu">Профиль</span>
+          </a>
+        </li>
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">Управление</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'product_list' %}" aria-expanded="false">
+            <span>
+               <i class="bi bi-receipt-cutoff"></i>
+            </span>
+            <span class="hide-menu">Список товаров</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'category_list' %}" aria-expanded="false">
+            <span>
+               <i class="bi bi-tags-fill"></i>
+            </span>
+            <span class="hide-menu">Список категории</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'history_of_sales' %}" aria-expanded="false">
+            <span>
+               <i class="bi bi-cash-coin"></i>
+            </span>
+            <span class="hide-menu">История продаж</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
+<!--  Sidebar End -->
+
+<div class="body-wrapper">
+  <!--  Header Start -->
+  <header class="app-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav">
+        <li class="nav-item d-block d-xl-none">
+          <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+               <i class="bi bi-list"></i>
+          </a>
+        </li>
+      </ul>
+      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+          <p style="margin-top: 10px; font-size: 18px;">Салом, {{ user.username }}</p>
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-gear-fill"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+              <div class="message-body">
+                <a href="{% url 'change_password' %}" class="d-flex align-items-center gap-2 dropdown-item">
+                  <i class="ti ti-mail fs-6"></i>
+                   <p class="mb-0 fs-3">Изменить пароль</p>
+                </a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-primary mx-3 mt-2 d-block">Выйти</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>

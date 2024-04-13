@@ -1,0 +1,147 @@
+{% extends 'shahzodspace/base.html' %}
+
+    {% block content %}
+
+    {% block sidebar %}
+    {% include 'shahzodspace/sidebar.html' %}
+    {% endblock %}
+
+   <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <!--  Main wrapper -->
+  <div class="body-wrapper">
+    <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h1>История продаж</h1>
+ 
+    <form class="w-50 m-4" method="get">
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Показать</button>
+    </form>
+
+
+    <!--  Header End -->
+   <div class="container-fluid">
+    <h2 class="card-title fw-semibold mb-4">Финансовая статистика</h2>
+    <!-- Row 1 -->
+    <div class="row">
+      <!-- Карточка Расход -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-start">
+              <div class="col-8">
+                <h5 class="card-title mb-9 fw-semibold">Расход:</h5>
+                <h4 class="fw-semibold mb-3">{{ total_cost|floatformat:2 }}</h4>
+              </div>
+              <div class="col-4">
+                <div class="d-flex justify-content-end">
+                  <div class="text-white bg-danger rounded-circle p-6 d-flex align-items-center justify-content-center">
+                    <i class="ti ti-currency-dollar fs-6"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="earning"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="row">
+      <!-- Карточка Доход -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-start">
+              <div class="col-8">
+                <h5 class="card-title mb-9 fw-semibold">Доход:</h5>
+                <h4 class="fw-semibold mb-3">{{ total_income|floatformat:2 }}</h4>
+              </div>
+              <div class="col-4">
+                <div class="d-flex justify-content-end">
+                  <div class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                    <i class="ti ti-currency-dollar fs-6"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="earning"></div>
+        </div>
+      </div>
+      <!-- Карточка Прибыль -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-start">
+              <div class="col-8">
+                <h5 class="card-title mb-9 fw-semibold">Прибыль:</h5>
+                <h4 class="fw-semibold mb-3">{{ total_profit|floatformat:2 }}</h4>
+              </div>
+              <div class="col-4">
+                <div class="d-flex justify-content-end">
+                  <div class="text-white bg-success rounded-circle p-6 d-flex align-items-center justify-content-center">
+                    <i class="ti ti-currency-dollar fs-6"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="earning"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <table class="table m-2" border="1">
+        <thead>
+            <tr>
+                <th>Название товара</th>
+                <th>Количество</th>
+                <th>Скидка %</th>
+                <th>Цена закупки</th>
+                <th>Цена продажи</th>
+                <th>Дата продажи</th>
+                <th>Возврат</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.product.name }}</td>
+                    <td>{{ sale.quantity }}</td>
+                    <td>{{ sale.discount_percentage }}</td>
+                    <td>{{ sale.product.purchase_price }}</td>
+                    <td>{{ sale.sale_price }}</td>
+                    <td>{{ sale.sale_date|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        <!-- Кнопка для возврата товара -->
+                        <form action="{% url 'return_product' sale.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success"><i class="bi bi-arrow-return-right"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Продажи отсутствуют.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary m-3" href="{% url 'product_list' %}">Вернуться к списку товаров</a>
+    <a href="{% url 'export_sales_report' %}" class="btn btn-primary">Скачать отчет по продажам</a>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div> 
+
+    {% endblock %}
+
+
+

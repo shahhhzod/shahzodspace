@@ -1,0 +1,26 @@
+{% extends 'shahzodspace/base.html' %}
+
+    {% block content %}
+
+    {% block sidebar %}
+    {% include 'shahzodspace/sidebar.html' %}
+    {% endblock %}
+
+   <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <!--  Main wrapper -->
+  <div class="body-wrapper">
+    <div class="container-fluid">
+      <h2>Создать/редактировать продукт</h2>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+      </div>
+    </div>
+  </div> 
+
+    {% endblock %}
+

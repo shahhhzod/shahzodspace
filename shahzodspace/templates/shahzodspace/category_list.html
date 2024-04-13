@@ -1,0 +1,33 @@
+{% extends 'shahzodspace/base.html' %}
+
+    {% block content %}
+
+    {% block sidebar %}
+    {% include 'shahzodspace/sidebar.html' %}
+    {% endblock %}
+
+   <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <!--  Main wrapper -->
+  <div class="body-wrapper">
+    <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Мои категории</h5>
+                    <ul>
+                        <ol>
+                            {% for category in categories %}
+                            <li>{{ category.name }}</li>
+                            {% endfor %}
+                        </ol>
+                    </ul>
+                    <a class="btn btn-primary" href="{% url 'add_category' %}">Добавить категорию</a>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div> 
+
+    {% endblock %}
+

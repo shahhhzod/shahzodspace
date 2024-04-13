@@ -1,0 +1,32 @@
+{% extends 'shahzodspace/base.html' %}
+
+    {% block content %}
+
+    {% block sidebar %}
+    {% include 'shahzodspace/sidebar.html' %}
+    {% endblock %}
+
+   <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <!--  Main wrapper -->
+  <div class="body-wrapper">
+    <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title fw-semibold mb-4">Продать товар: {{ product.name }}</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary m-3">Продать</button>
+                    </form>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div> 
+
+    {% endblock %}
+
+
+
