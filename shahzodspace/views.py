@@ -170,6 +170,7 @@ def product_delete(request, pk):
             product.delete()
             return redirect('product_list')  # Вернитесь на страницу со списком товаров после удаления
 
+
 @login_required
 def product_list(request):
     search_query = request.GET.get('search', '')
@@ -178,7 +179,10 @@ def product_list(request):
     products = Product.objects.filter(user=request.user)
     
     if search_query:
-        products = products.filter(name__icontains=search_query)
+        products = products.filter(
+            Q(name__icontains=search_query) |
+            Q(model__icontains=search_query)  # Фильтрация по полю model
+        )
     
     if category_query:
         products = products.filter(category__id=category_query)

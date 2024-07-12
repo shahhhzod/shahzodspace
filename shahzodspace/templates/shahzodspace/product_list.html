@@ -85,19 +85,27 @@
     <div class="container-fluid">
         <!-- Форма поиска -->
         <form method="get" class="form-list w-100">
-           <div class="input-group">
-               <input type="text" class="form-control" placeholder="Поиск по наименованию..." name="search" value="{{ request.GET.search }}">
-               <select name="category" class="form-select">
-                   <option value="">Все категории</option>
-                   {% for category in categories %}
-                       <option value="{{ category.id }}" {% if category.id|stringformat:"s" == current_category %}selected{% endif %}>{{ category.name }}</option>
-                   {% endfor %}
-               </select>
-               <button class="btn btn-outline-secondary" type="submit">Фильтровать</button>
-               <a href="{% url 'export_products' %}" class="btn btn-success">Экспорт в Excel</a>
-               <a href="{% url 'product_add' %}" class="btn btn-primary">Добавить товар</a>
-           </div>
-       </form>
+          <div class="input-group">
+              <!-- Поле для поиска, которое будет искать и по наименованию, и по модели -->
+              <input type="text" class="form-control" placeholder="Поиск по наименованию или модели..." name="search" value="{{ request.GET.search }}">
+      
+              <!-- Выпадающий список для выбора категории -->
+              <select name="category" class="form-select">
+                  <option value="">Все категории</option>
+                  {% for category in categories %}
+                      <option value="{{ category.id }}" {% if category.id|stringformat:"s" == current_category %}selected{% endif %}>{{ category.name }}</option>
+                  {% endfor %}
+              </select>
+      
+              <!-- Кнопка для отправки формы -->
+              <button class="btn btn-outline-secondary" type="submit">Фильтровать</button>
+      
+              <!-- Кнопки для экспорта и добавления товара -->
+              <a href="{% url 'export_products' %}" class="btn btn-success">Экспорт в Excel</a>
+              <a href="{% url 'product_add' %}" class="btn btn-primary">Добавить товар</a>
+          </div>
+      </form>
+      
 
         <!-- Вид в виде списка (текущий) -->
         <table style="margin-top: 50px;" class="table">
