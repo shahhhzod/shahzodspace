@@ -175,24 +175,26 @@ def product_delete(request, pk):
 def product_list(request):
     search_query = request.GET.get('search', '')
     category_query = request.GET.get('category', None)
-    
+    model_query = request.GET.get('model', '')  # Добавляем фильтр по модели
+
     products = Product.objects.filter(user=request.user)
-    
+
     if search_query:
-        products = products.filter(
-            Q(name__icontains=search_query) |
-            Q(model__icontains=search_query)  # Фильтрация по полю model
-        )
-    
+        products = products.filter(name__icontains=search_query)
+
     if category_query:
         products = products.filter(category__id=category_query)
-    
-    categories = Category.objects.filter(user=request.user)  # Получаем категории текущего пользователя для сортировки
+
+    if model_query:
+        products = products.filter(model__icontains=model_query)  # Фильтрация по модели
+
+    categories = Category.objects.filter(user=request.user)
 
     return render(request, 'shahzodspace/product_list.html', {
         'products': products,
         'categories': categories,
-        'current_category': category_query
+        'current_category': category_query,
+        'current_model': model_query  # Передаем текущую модель в шаблон
     })
 
 
