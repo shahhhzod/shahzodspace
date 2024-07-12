@@ -175,7 +175,8 @@ def product_delete(request, pk):
 def product_list(request):
     search_query = request.GET.get('search', '')
     category_query = request.GET.get('category', None)
-    model_query = request.GET.get('model', '')  # Добавляем фильтр по модели
+    model_query = request.GET.get('model', '')
+    item_number_query = request.GET.get('item_number', '')  # Добавляем фильтр по номеру товара
 
     products = Product.objects.filter(user=request.user)
 
@@ -188,13 +189,17 @@ def product_list(request):
     if model_query:
         products = products.filter(model__icontains=model_query)  # Фильтрация по модели
 
+    if item_number_query:
+        products = products.filter(item_number__icontains=item_number_query)  # Фильтрация по номеру товара
+
     categories = Category.objects.filter(user=request.user)
 
     return render(request, 'shahzodspace/product_list.html', {
         'products': products,
         'categories': categories,
         'current_category': category_query,
-        'current_model': model_query  # Передаем текущую модель в шаблон
+        'current_model': model_query,
+        'current_item_number': item_number_query  # Передаем текущий номер товара в шаблон
     })
 
 

@@ -86,7 +86,8 @@
       <form method="get" class="form-list w-100">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Поиск по наименованию..." name="search" value="{{ request.GET.search }}">
-            <input type="text" class="form-control" placeholder="Поиск по модели..." name="model" value="{{ request.GET.model }}">  <!-- Добавляем поле поиска по модели -->
+            <input type="text" class="form-control" placeholder="Поиск по номеру товара..." name="item_number" value="{{ request.GET.item_number }}">  <!-- Добавляем поле поиска по номеру товара -->  
+            <input type="text" class="form-control" placeholder="Поиск по модели..." name="model" value="{{ request.GET.model }}">
             <select name="category" class="form-select">
                 <option value="">Все категории</option>
                 {% for category in categories %}
